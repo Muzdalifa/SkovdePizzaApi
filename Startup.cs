@@ -32,6 +32,18 @@ namespace SkovdePizzaApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SkovdePizzaApi", Version = "v1" });
             });
+
+            //Configure CORS 
+            services.AddCors(options =>
+                {
+                    options.AddDefaultPolicy(builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000")
+                               .AllowAnyHeader()
+                               .AllowAnyMethod();
+                    });
+                }
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +59,7 @@ namespace SkovdePizzaApi
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthorization();
 
