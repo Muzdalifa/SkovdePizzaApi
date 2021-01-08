@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using SkovdePizzaApi.Models;
 
 namespace SkovdePizzaApi.Controllers
 {
@@ -19,37 +20,34 @@ namespace SkovdePizzaApi.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateCheckoutSession()
+        public ActionResult CreateCheckoutSession([FromBody] PaymentData paymentData)
         {
+            if (!ModelState.IsValid)
+            {
+                return new RedirectResult("http://localhost:3000");
+            }
             var options = new SessionCreateOptions
             {
                 PaymentMethodTypes = new List<string> { "card" },
                 LineItems = new List<SessionLineItemOptions>
                 {
                     new SessionLineItemOptions
-                    {
-                        PriceData = new SessionLineItemPriceDataOptions
-                        {
-                            UnitAmount = 2000,
-                            Currency = "sek",
-                            ProductData = new SessionLineItemPriceDataProductDataOptions
-                            {
-                                Name = "T-shirt",
-                            },
-
-                        },
+                    {                        
+                        Amount = paymentData.Cost * 100,
+                        Currency= "sek",
+                        Name = paymentData.OrderNumber,
                         Quantity = 1,
                     },
                 },
                 Mode = "payment",
-                SuccessUrl = "https://example.com/success",
-                CancelUrl = "https://example.com/cancel",
+                SuccessUrl = "http://localhost:3000/",
+                CancelUrl = "http://localhost:3000/order",
             };
 
             var service = new SessionService();
-            Session session = service.Create(options);
+            var session = service.Create(options);
 
-            return new JsonResult(new { id = session.Id });
+            return new JsonResult(new { sessionId = session.Id });
 
         }
     }
