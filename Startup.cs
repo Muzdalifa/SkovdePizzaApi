@@ -38,7 +38,7 @@ namespace SkovdePizzaApi
                 {
                     options.AddDefaultPolicy(builder =>
                     {
-                        builder.WithOrigins("http://localhost:3000")
+                        builder.WithOrigins("*")
                                .AllowAnyHeader()
                                .AllowAnyMethod();
                     });
@@ -57,7 +57,8 @@ namespace SkovdePizzaApi
             }
 
             app.UseHttpsRedirection();
-
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseCors();
 
