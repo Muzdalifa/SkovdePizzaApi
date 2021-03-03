@@ -22,9 +22,11 @@ namespace SkovdePizzaApi.Controllers
         [HttpPost]
         public ActionResult CreateCheckoutSession([FromBody] PaymentData paymentData)
         {
+            //Console.WriteLine("https://" + Request.Host.ToString());
+            var urlOrigin = "https://" + Request.Host.ToString();
             if (!ModelState.IsValid)
             {
-                return new RedirectResult("http://localhost:3000");
+                return new RedirectResult(urlOrigin);
             }
             var options = new SessionCreateOptions
             {
@@ -40,8 +42,8 @@ namespace SkovdePizzaApi.Controllers
                     },
                 },
                 Mode = "payment",
-                SuccessUrl = "http://localhost:3000/",
-                CancelUrl = "http://localhost:3000/order",
+                SuccessUrl = urlOrigin,
+                CancelUrl = $"{urlOrigin}//OrderPage",
             };
 
             var service = new SessionService();
