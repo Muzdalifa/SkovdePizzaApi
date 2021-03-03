@@ -44,6 +44,13 @@ namespace SkovdePizzaApi
                     });
                 }
             );
+
+            // In production, the React files will be served from this directory
+            services.AddSpaStaticFiles(configuration =>
+            {
+                configuration.RootPath = "wwwroot";
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,15 +66,19 @@ namespace SkovdePizzaApi
             app.UseHttpsRedirection();
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            //for running react app, need to install spaSevices.Extension from nuget package
+            app.UseSpaStaticFiles();
             app.UseRouting();
-            app.UseCors();
-
             app.UseAuthorization();
+            app.UseCors();         
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToFile("Index.html");
+
             });
+
         }
     }
 }
