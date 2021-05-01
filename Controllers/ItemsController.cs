@@ -97,7 +97,7 @@ namespace SkovdePizzaApi.Controllers
             {
                 String imageName = new String(Path.GetFileNameWithoutExtension(imageFile.FileName).Take(10).ToArray()).Replace(' ', '-');
                 imageName = imageName + DateTime.Now.ToString("yymmssfff") + Path.GetExtension(imageFile.FileName);
-                var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "wwwroot","static","images", imageName);
+                var imagePath = Path.Combine(_hostEnvironment.ContentRootPath, "wwwroot","images", imageName);
 
                 //resizing image
                 using var image = Image.Load(imageFile.OpenReadStream());
