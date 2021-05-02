@@ -29,7 +29,7 @@ namespace SkovdePizzaApi.Controllers
         // GET: api/Items
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Item>>> GetItems()
-        {            
+        {
             return await _context.Items.ToListAsync();
         }
 

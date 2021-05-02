@@ -5,10 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\static\images\**" />
-    <Content Remove="wwwroot\static\images\**" />
-    <EmbeddedResource Remove="wwwroot\static\images\**" />
-    <None Remove="wwwroot\static\images\**" />
+    <Compile Remove="wwwroot\images\**" />
+    <Content Remove="wwwroot\images\**" />
+    <EmbeddedResource Remove="wwwroot\images\**" />
+    <None Remove="wwwroot\images\**" />
   </ItemGroup>
 
   <ItemGroup>
