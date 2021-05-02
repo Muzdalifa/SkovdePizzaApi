@@ -27,7 +27,7 @@ namespace SkovdePizzaApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<SkovdePizzaApiContext>(options => options.UseSqlite(@"Data Source=pizza_1.db"));
+            services.AddDbContext<SkovdePizzaApiContext>(options => options.UseSqlite(@"Data Source=pizza_2.db"));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
